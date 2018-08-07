@@ -1,3 +1,5 @@
+window.addEventListener('load', installServiceWorkerAsync)
+
 let animeHistory = []
 const API_BASE = 'https://api.jikan.moe/'
 const API_ANIME = API_BASE + 'anime/'
@@ -59,5 +61,19 @@ async function onOkButtonClickAsync() {
 function removeParent(evt) {
 	if (evt.target.parentElement.classList.contains('error-alert')) {
 		evt.target.parentElement.remove()
+	}
+}
+
+async function installServiceWorkerAsync() {
+	console.log('Install Service Worker')
+	if ('serviceWorker' in navigator) {
+		try {
+			let serviceWorker = await navigator.serviceWorker.register(
+				'/serviceworker.js'
+			)
+			console.log(`Service worker registered ${serviceWorker}`)
+		} catch (err) {
+			console.error(`Failed to register service worker: ${err}`)
+		}
 	}
 }
