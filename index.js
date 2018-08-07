@@ -1,8 +1,9 @@
-window.addEventListener('load', installServiceWorkerAsync)
-
 let animeHistory = []
 const API_BASE = 'https://api.jikan.moe/'
 const API_ANIME = API_BASE + 'anime/'
+const HISTORY_STORAGE_KEY = 'PWA_EXAMPLE_BUILD_HISTORY_KEY'
+
+window.addEventListener('load', installServiceWorkerAsync)
 
 document
 	.querySelector('.input-element button')
@@ -23,6 +24,7 @@ const buildAnimeMarkup = anime => {
 
 function updateHistory(anime) {
 	animeHistory.push(anime)
+	localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(animeHistory))
 	addAnimeToHistoryTag(anime)
 }
 
@@ -66,9 +68,15 @@ function removeParent(evt) {
 
 async function installServiceWorkerAsync() {
 	console.log('Install Service Worker')
+	const history = getLocalHistory()
+
+	if (history !== null) {
+		animeHistory = history
+		animeHistory.forEach(anime => addAnimeToHistoryTag(anime))
+	}
 	if ('serviceWorker' in navigator) {
 		try {
-			let serviceWorker = await navigator.serviceWorker.register(
+			const serviceWorker = await navigator.serviceWorker.register(
 				'/serviceworker.js'
 			)
 			console.log(`Service worker registered ${serviceWorker}`)
@@ -76,4 +84,8 @@ async function installServiceWorkerAsync() {
 			console.error(`Failed to register service worker: ${err}`)
 		}
 	}
+}
+
+function getLocalHistory() {
+	return JSON.parse(localStorage.getItem(HISTORY_STORAGE_KEY))
 }
