@@ -1,5 +1,5 @@
 const CACHE_NAME = 'V1'
-const urlsToCache = ['/index.html', '/main.css', '/main.js']
+const urlsToCache = ['./index.html', './main.css', './main.js']
 
 /**
  * The install event is fired when the registration succeeds.
