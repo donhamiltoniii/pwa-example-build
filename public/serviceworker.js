@@ -1,13 +1,18 @@
 const CACHE_NAME = 'V1'
+const urlsToCache = ['/index.html', '/main.css', '/main.js']
 
 /**
  * The install event is fired when the registration succeeds.
  * After the install step, the browser tries to activate the service worker.
  * Generally, we cache static resources that allow the website to run offline
  */
-this.addEventListener('install', async function() {
-	const cache = await caches.open(CACHE_NAME)
-	cache.addAll(['/index.html', '/main.css', '/main.js'])
+self.addEventListener('install', event => {
+	event.waitUntil(
+		caches.open(CACHE_NAME).then(cache => {
+			console.log('Opened cache')
+			return cache.addAll(urlsToCache)
+		})
+	)
 })
 
 /**

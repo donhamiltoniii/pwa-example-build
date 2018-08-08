@@ -74,15 +74,33 @@ async function installServiceWorkerAsync() {
 		animeHistory = history
 		animeHistory.forEach(anime => addAnimeToHistoryTag(anime))
 	}
+	/**
+	 * Temp removal of previous serviceworker code
+	 */
+	// if ('serviceWorker' in navigator) {
+	// 	try {
+	// 		const serviceWorker = await navigator.serviceWorker.register(
+	// 			'./serviceworker.js'
+	// 		)
+	// 		console.log(`Service worker registered ${serviceWorker}`)
+	// 	} catch (err) {
+	// 		console.error(`Failed to register service worker: ${err}`)
+	// 	}
+	// }
 	if ('serviceWorker' in navigator) {
-		try {
-			const serviceWorker = await navigator.serviceWorker.register(
-				'serviceworker.js'
-			)
-			console.log(`Service worker registered ${serviceWorker}`)
-		} catch (err) {
-			console.error(`Failed to register service worker: ${err}`)
-		}
+		navigator.serviceWorker.register('/serviceworker.js').then(
+			function(registration) {
+				// Registration was successful
+				console.log(
+					'ServiceWorker registration successful with scope: ',
+					registration.scope
+				)
+			},
+			function(err) {
+				// registration failed :(
+				console.log('ServiceWorker registration failed: ', err)
+			}
+		)
 	}
 }
 
