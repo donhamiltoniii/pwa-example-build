@@ -8,19 +8,19 @@
 	"theme_color": "#39add1",
 	"icons": [
 		{
-			"src": "/img/mstile-150x150.png",
+			"src": "img/mstile-150x150.png",
 			"sizes": "150 x 150"
 		},
 		{
-			"src": "/img/android-chrome-512x512.png",
+			"src": "img/android-chrome-512x512.png",
 			"sizes": "512 x 512"
 		},
 		{
-			"src": "/img/mstile-150x150.png",
+			"src": "img/mstile-150x150.png",
 			"sizes": "64 x 64"
 		},
 		{
-			"src": "/img/android-chrome-192x192.png",
+			"src": "img/android-chrome-192x192.png",
 			"sizes": "192 x 192"
 		}
 	]
