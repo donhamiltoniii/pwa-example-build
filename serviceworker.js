@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v1'
+const CACHE_NAME = 'pwa-example-build-v1'
 const urlsToCache = ['./index.html', './main.css', './main.js']
 
 /**
