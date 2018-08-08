@@ -3,7 +3,7 @@ const API_BASE = 'https://api.jikan.moe/'
 const API_ANIME = API_BASE + 'anime/'
 const HISTORY_STORAGE_KEY = 'PWA_EXAMPLE_BUILD_HISTORY_KEY'
 
-document.body.addEventListener('load', installServiceWorkerAsync)
+installServiceWorkerAsync()
 
 document
 	.querySelector('.input-element button')
