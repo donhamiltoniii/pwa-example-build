@@ -3,7 +3,7 @@ const API_BASE = 'https://api.jikan.moe/'
 const API_ANIME = API_BASE + 'anime/'
 const HISTORY_STORAGE_KEY = 'PWA_EXAMPLE_BUILD_HISTORY_KEY'
 
-window.addEventListener('load', installServiceWorkerAsync)
+document.body.addEventListener('load', installServiceWorkerAsync)
 
 document
 	.querySelector('.input-element button')
@@ -77,7 +77,7 @@ async function installServiceWorkerAsync() {
 	if ('serviceWorker' in navigator) {
 		try {
 			const serviceWorker = await navigator.serviceWorker.register(
-				'/serviceworker.js'
+				'serviceworker.js'
 			)
 			console.log(`Service worker registered ${serviceWorker}`)
 		} catch (err) {
