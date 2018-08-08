@@ -1,72 +1,74 @@
-let animeHistory = []
-const API_BASE = 'https://api.jikan.moe/'
-const API_ANIME = API_BASE + 'anime/'
-const HISTORY_STORAGE_KEY = 'PWA_EXAMPLE_BUILD_HISTORY_KEY'
+// let animeHistory = []
+// const API_BASE = 'https://api.jikan.moe/'
+// const API_ANIME = API_BASE + 'anime/'
+// const HISTORY_STORAGE_KEY = 'PWA_EXAMPLE_BUILD_HISTORY_KEY'
 
-installServiceWorkerAsync()
+// installServiceWorkerAsync()
 
-document
-	.querySelector('.input-element button')
-	.addEventListener('click', onOkButtonClickAsync)
-document.body.addEventListener('click', removeParent)
+// document
+// 	.querySelector('.input-element button')
+// 	.addEventListener('click', onOkButtonClickAsync)
+// document.body.addEventListener('click', removeParent)
 
-const buildAnimeMarkup = anime => {
-	return `
-        <li>
-            <img src="${anime.image_url}">
-            <h3>${anime.title}</h3>
-            <time>${
-				anime.premiered ? anime.premiered : 'No Date Provided'
-			}</time>
-        </li>
-    `
-}
+// const buildAnimeMarkup = anime => {
+// 	return `
+//         <li>
+//             <img src="${anime.image_url}">
+//             <h3>${anime.title}</h3>
+//             <time>${
+// 				anime.premiered ? anime.premiered : 'No Date Provided'
+// 			}</time>
+//         </li>
+//     `
+// }
 
-function updateHistory(anime) {
-	animeHistory.push(anime)
-	localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(animeHistory))
-	addAnimeToHistoryTag(anime)
-}
+// function updateHistory(anime) {
+// 	animeHistory.push(anime)
+// 	localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(animeHistory))
+// 	addAnimeToHistoryTag(anime)
+// }
 
-function addAnimeToHistoryTag(anime) {
-	document.querySelector('.history ul').innerHTML =
-		buildAnimeMarkup(anime) +
-		document.querySelector('.history ul').innerHTML
-}
+// function addAnimeToHistoryTag(anime) {
+// 	document.querySelector('.history ul').innerHTML =
+// 		buildAnimeMarkup(anime) +
+// 		document.querySelector('.history ul').innerHTML
+// }
 
-async function onOkButtonClickAsync() {
-	let targetElement = document.querySelector('main ul')
-	let animeId = document.querySelector('.input-element input').value
-	try {
-		const response = await fetch(API_ANIME + animeId)
-		if (!response.ok) {
-			const alertBox = document.createElement('div')
-			alertBox.classList.add('error-alert')
-			alertBox.innerHTML = `
-                <button>+</button>
-                <p>There was a (${
-					response.status
-				}) error from API provider. Please try another id.</p>
-            `
-			document.body.appendChild(alertBox)
-			return
-		}
-		let anime = await response.json()
-		targetElement.innerHTML = buildAnimeMarkup(anime)
+// async function onOkButtonClickAsync() {
+// 	let targetElement = document.querySelector('main ul')
+// 	let animeId = document.querySelector('.input-element input').value
+// 	try {
+// 		const response = await fetch(API_ANIME + animeId)
+// 		if (!response.ok) {
+// 			const alertBox = document.createElement('div')
+// 			alertBox.classList.add('error-alert')
+// 			alertBox.innerHTML = `
+//                 <button>+</button>
+//                 <p>There was a (${
+// 					response.status
+// 				}) error from API provider. Please try another id.</p>
+//             `
+// 			document.body.appendChild(alertBox)
+// 			return
+// 		}
+// 		let anime = await response.json()
+// 		targetElement.innerHTML = buildAnimeMarkup(anime)
 
-		updateHistory(anime)
-	} catch (err) {
-		console.error(`error ${err}`)
-	}
-}
+// 		updateHistory(anime)
+// 	} catch (err) {
+// 		console.error(`error ${err}`)
+// 	}
+// }
 
-function removeParent(evt) {
-	if (evt.target.parentElement.classList.contains('error-alert')) {
-		evt.target.parentElement.remove()
-	}
-}
+// function removeParent(evt) {
+// 	if (evt.target.parentElement.classList.contains('error-alert')) {
+// 		evt.target.parentElement.remove()
+// 	}
+// }
 
-async function installServiceWorkerAsync() {
+installServiceWorker()
+
+function installServiceWorker() {
 	console.log('Install Service Worker')
 	// const history = getLocalHistory()
 
