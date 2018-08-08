@@ -88,7 +88,7 @@ async function installServiceWorkerAsync() {
 	// 	}
 	// }
 	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('/serviceworker.js').then(
+		navigator.serviceWorker.register('serviceworker.js').then(
 			function(registration) {
 				// Registration was successful
 				console.log(
