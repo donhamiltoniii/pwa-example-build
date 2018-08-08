@@ -68,12 +68,12 @@ function removeParent(evt) {
 
 async function installServiceWorkerAsync() {
 	console.log('Install Service Worker')
-	const history = getLocalHistory()
+	// const history = getLocalHistory()
 
-	if (history !== null) {
-		animeHistory = history
-		animeHistory.forEach(anime => addAnimeToHistoryTag(anime))
-	}
+	// if (history !== null) {
+	// 	animeHistory = history
+	// 	animeHistory.forEach(anime => addAnimeToHistoryTag(anime))
+	// }
 	if ('serviceWorker' in navigator) {
 		navigator.serviceWorker.register('./serviceworker.js').then(
 			function(registration) {
